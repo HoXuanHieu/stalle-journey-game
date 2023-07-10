@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Spawn_enemy : MonoBehaviour
 {
     public GameObject enemy_ship_1;
@@ -15,12 +16,13 @@ public class Spawn_enemy : MonoBehaviour
     public bool state_1 = true;
     public bool state_2 = false;
     public bool state_3 = false;
+    GameOverText gameOverText;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameOverText = GameObject.FindGameObjectWithTag("gameOver").GetComponent<GameOverText>();
     }
 
     // Update is called once per frame
@@ -65,6 +67,9 @@ public class Spawn_enemy : MonoBehaviour
             Instantiate(boss, new Vector3(0, 8, 0),transform.rotation);
             state_3 = false;
         }  
+        if(GameObject.Find("fighter(Clone)") == null){
+            gameOverText.GameOver();
+        }
     }
     void spawnEnemy_state1(){
         Instantiate(enemy_ship_1, new Vector3(Random.Range(-7,7), 6, 0),transform.rotation);
